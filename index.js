@@ -3,6 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var flash = require('express-flash');
+var morganLogger = require("morgan")
 //require mangoose and create a database that takes strings
 var mongoose = require('mongoose');
 const mongoURL = process.env.MONGO_DB_URL || "mongodb://localhost/shoe_api";
@@ -13,15 +14,19 @@ var app = express();
 mongoose.connect(mongoURL);
 
 var shoeAPISchema = mongoose.Schema({
-    regNum: {
+    id: {
         type: String,
         unique: true,
         sparse: true
-    }
+    },
+    color : String,
+    brand : String,
+    price : Number,
+    in_stock : Number
 });
 
 shoeAPISchema.index({
-    regNum: 1
+    id: 1
 }, {
     unique: true
 });
@@ -41,11 +46,52 @@ app.use(session({
     }
 }));
 app.use(flash());
+app.use(morganLogger("dev"));
 
 
+//getting my routes
+//	List all shoes in stock
+app.get('/api/shoes', function(req,res){
+  ShoeAPI.find({}, function(err, shoes){
+    if (err) {
+      console.log();
+    }
+    else {
+      res.json({
+        response: "Trying out api",
+        data: shoes,
+
+      })
+    }
+  })
+
+});
+
+//	List all shoes for a given brand
+app.get('/api/shoes/brand/:brandname', function(req,res){
+
+});
+
+//	List all shoes for a given size
+app.get('/api/shoes/size/:size', function(req,res){
+
+});
+
+//	List all shoes for a given brand and size
+app.get('/api/shoes/brand/:brandname/size/:size', function(req,res){
+
+});
+
+//	Update the stock levels when a shoe is sold
+app.post('/api/shoes/sold/:id', function(req,res){
+
+});
 
 
+//	Add a new new shoe to his stock.
+app.post('/api/shoes', function(req,res){
 
+});
 
 
 
