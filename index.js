@@ -57,11 +57,7 @@ app.get('/api/shoes', function(req,res){
       console.log();
     }
     else {
-      res.json({
-        response: "Trying out api",
-        data: shoes,
-
-      })
+      res.json(shoes)
     }
   })
 
@@ -91,8 +87,35 @@ app.post('/api/shoes/sold/:id', function(req,res){
 //	Add a new new shoe to his stock.
 app.post('/api/shoes', function(req,res){
 
+  var addedItems = req.body;
+
+  var shoe = new ShoeAPI(addedItems);
+
+  shoe.save(function(err,shoes){
+    if(err){
+      console.log(err);
+    }
+    else {
+      console.log("Item added successfully");;
+    }
+  })
+
 });
 
+/*app.use(function(req,res,next){
+  var err = new Error("Not found");
+  err.status = 404;
+  next(err);
+});
+
+/*app.use(function(req,res,next){
+  res.status(err.status || 500);
+  res.json({
+          error: {
+                messsage: err.message
+        }
+})
+});*/
 
 
 //connecting to my server, running my sever ports 5001 or any available port
