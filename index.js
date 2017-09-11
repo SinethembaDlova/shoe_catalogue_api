@@ -19,10 +19,10 @@ var shoeAPISchema = mongoose.Schema({
         unique: true,
         sparse: true
     },
-    color : String,
-    brand : String,
-    price : Number,
-    in_stock : Number
+    color: String,
+    brand: String,
+    price: Number,
+    in_stock: Number
 });
 
 shoeAPISchema.index({
@@ -31,7 +31,7 @@ shoeAPISchema.index({
     unique: true
 });
 
-var ShoeAPI = mongoose.model('ShoeAPI',shoeAPISchema);
+var ShoeAPI = mongoose.model('ShoeAPI', shoeAPISchema);
 
 //app using all my dependencies
 app.use(express.static('public'));
@@ -48,58 +48,132 @@ app.use(session({
 app.use(flash());
 app.use(morganLogger("dev"));
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+    if (req.method === "OPTIONS") {
+        res.header("Access-Control-Allow-Methods", "PUT,POST,DELETE");
+        return res.status(200).json({});
+    }
+    next();
+})
+
 
 //getting my routes
 //	List all shoes in stock
-app.get('/api/shoes', function(req,res){
-  ShoeAPI.find({}, function(err, shoes){
-    if (err) {
-      console.log();
-    }
-    else {
-      res.json(shoes)
-    }
-  })
+app.get('/api/shoes', function(req, res) {
+    ShoeAPI.find({}, function(err, shoes) {
+        if (err) {
+            res.json({
+                response: 'Status Failure',
+                error: err,
+                status: 500,
+                data: results
+            });
+        } else {
+            res.json({
+                status: 200,
+                response: 'route to GET all Shoes',
+                data: shoes
+            })
+        }
+    })
 
 });
 
 //	List all shoes for a given brand
-app.get('/api/shoes/brand/:brandname', function(req,res){
+app.get('/api/shoes/brand/:brandname', function(req, res) {
 
+    var brandName = "Nike";
+
+    ShoeAPI.find({
+        brand: brandName
+    }, function(err, thisBrand) {
+
+        if (err) {
+            res.json({
+                status: 500,
+                response: 'Failed to get this shoes brand',
+                error: err
+            });
+        } else {
+            res.json({
+                status: 500,
+                response: 'Failed to get this shoes brand',
+                error: err,
+                data: thisBrand
+            });
+        }
+
+
+    })
 });
 
 //	List all shoes for a given size
-app.get('/api/shoes/size/:size', function(req,res){
+app.get('/api/shoes/size/:size', function(req, res) {
 
 });
 
 //	List all shoes for a given brand and size
-app.get('/api/shoes/brand/:brandname/size/:size', function(req,res){
+app.get('/api/shoes/brand/:brandname/size/:size', function(req, res) {
 
 });
 
 //	Update the stock levels when a shoe is sold
-app.post('/api/shoes/sold/:id', function(req,res){
+app.put('/api/shoes/sold/:id', function(req, res) {
 
+    var ammount = req.body.ammount
+    var brandName = req.params.id
+
+    ShoeAPI.findOne({
+        brand: brandName
+    }, function(err, shoes) {
+        if (err) {
+            console.log(err);
+        } else {
+            shoes.in_stock = shoes.in_stock - ammount;
+            shoes.save(function(err, updatedStock) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.json();
+                }
+            })
+        }
+    })
 });
 
 
 //	Add a new new shoe to his stock.
-app.post('/api/shoes', function(req,res){
+app.post('/api/shoes', function(req, res) {
 
-  var addedItems = req.body;
+    var addedItems = req.body;
 
-  var shoe = new ShoeAPI(addedItems);
+    var shoe = new ShoeAPI({
+        id: 100,
+        color: "Red",
+        brand: "Nike",
+        price: 500,
+        in_stock: 10
+    });
 
-  shoe.save(function(err,shoes){
-    if(err){
-      console.log(err);
-    }
-    else {
-      console.log("Item added successfully");;
-    }
-  })
-
+    shoe.save(function(err, shoes) {
+        if (err) {
+            res.json({
+                status: 503,
+                response: 'Failed to shoes',
+                error: err,
+                data: shoes
+            });
+        } else {
+            res.json({
+                status: 200,
+                response: 'route to GET all Shoes',
+                data: shoes
+            })
+        }
+    })
 });
 
 /*app.use(function(req,res,next){
