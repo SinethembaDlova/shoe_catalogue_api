@@ -156,7 +156,8 @@ app.get('/api/shoes/brand/:brandname/size/:size', function(req, res) {
               response: 'Failed to GET a query for this shoe brand and size',
               error: err
           });
-      } else {
+      }
+      else {
           res.json({
               status: 200,
               response: 'Got a GET query for this shoe brand size.',
@@ -164,31 +165,39 @@ app.get('/api/shoes/brand/:brandname/size/:size', function(req, res) {
               data: thisBrand
           });
       }
-
-
   })
-
-
 });
 
 //	Update the stock levels when a shoe is sold
 app.put('/api/shoes/sold/:id', function(req, res) {
 
     var ammount = req.body.ammount
-    var brandName = req.params.id
+    var brandID = req.params.id
 
     ShoeAPI.findOne({
-        brand: brandName
+        id: brandID
     }, function(err, shoes) {
         if (err) {
-            console.log(err);
+          res.json({
+              status: 500,
+              response: 'Failed to UPDATE a query for this shoe ID',
+              error: err
+          });
         } else {
             shoes.in_stock = shoes.in_stock - ammount;
             shoes.save(function(err, updatedStock) {
                 if (err) {
-                    console.log(err);
+                  res.json({
+                      status: 500,
+                      response: 'Failed to UPDATE a query for this shoe ID',
+                      error: err
+                  });
                 } else {
-                    res.json();
+                  res.json({
+                      status: 200,
+                      response: 'Got a UPDATE query for this shoe brand ID.',
+                      data: thisBrand
+                  });
                 }
             })
         }
