@@ -203,8 +203,10 @@ app.post('/api/shoes', function(req, res) {
 
     var shoe = new ShoeAPI({
         id: req.body.id,
-        color: req.body.color,
         brand: req.body.brand,
+        image : req.body.image,
+        color: req.body.color,
+        size : req.body.size,
         price: req.body.price,
         in_stock: req.body.in_stock
     });
