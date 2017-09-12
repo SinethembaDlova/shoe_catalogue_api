@@ -66,7 +66,7 @@ app.get('/api/shoes', function(req, res) {
     ShoeAPI.find({}, function(err, shoes) {
         if (err) {
             res.json({
-                response: 'Status Failure',
+                response: 'Failed to GET a query for all shoes.',
                 error: err,
                 status: 500,
                 data: results
@@ -74,7 +74,7 @@ app.get('/api/shoes', function(req, res) {
         } else {
             res.json({
                 status: 200,
-                response: 'route to GET all Shoes',
+                response: 'Got a GET query for all shoes.',
                 data: shoes
             })
         }
@@ -85,22 +85,22 @@ app.get('/api/shoes', function(req, res) {
 //	List all shoes for a given brand
 app.get('/api/shoes/brand/:brandname', function(req, res) {
 
-    var brandName = "Nike";
+    var shoeBrand = req.params.brandname;
 
     ShoeAPI.find({
-        brand: brandName
+        brand: shoeBrand
     }, function(err, thisBrand) {
 
         if (err) {
             res.json({
                 status: 500,
-                response: 'Failed to get this shoes brand',
+                response: 'Failed to GET a query for this shoe brand',
                 error: err
             });
         } else {
             res.json({
-                status: 500,
-                response: 'Failed to get this shoes brand',
+                status: 200,
+                response: 'Got a GET query for this shoe brand.',
                 error: err,
                 data: thisBrand
             });
@@ -113,10 +113,61 @@ app.get('/api/shoes/brand/:brandname', function(req, res) {
 //	List all shoes for a given size
 app.get('/api/shoes/size/:size', function(req, res) {
 
+  var shoeSize = req.params.size;
+
+  ShoeAPI.find({
+      size: shoeSize
+  }, function(err, thisBrand) {
+
+      if (err) {
+          res.json({
+              status: 500,
+              response: 'Failed to GET a query for this shoe size',
+              error: err
+          });
+      } else {
+          res.json({
+              status: 200,
+              response: 'Got a GET query for this shoe size.',
+              error: err,
+              data: thisBrand
+          });
+      }
+
+
+  })
+
 });
 
 //	List all shoes for a given brand and size
 app.get('/api/shoes/brand/:brandname/size/:size', function(req, res) {
+
+  var shoeBrand = req.params.brandname;
+  var shoeSize = req.params.size;
+
+  ShoeAPI.find({
+      brand: shoeBrand,
+      size: shoeSize
+  }, function(err, thisBrand) {
+
+      if (err) {
+          res.json({
+              status: 500,
+              response: 'Failed to GET a query for this shoe brand and size',
+              error: err
+          });
+      } else {
+          res.json({
+              status: 200,
+              response: 'Got a GET query for this shoe brand size.',
+              error: err,
+              data: thisBrand
+          });
+      }
+
+
+  })
+
 
 });
 
@@ -151,25 +202,25 @@ app.post('/api/shoes', function(req, res) {
     var addedItems = req.body;
 
     var shoe = new ShoeAPI({
-        id: 100,
-        color: "Red",
-        brand: "Nike",
-        price: 500,
-        in_stock: 10
+        id: req.body.id,
+        color: req.body.color,
+        brand: req.body.brand,
+        price: req.body.price,
+        in_stock: req.body.in_stock
     });
 
     shoe.save(function(err, shoes) {
         if (err) {
             res.json({
                 status: 503,
-                response: 'Failed to shoes',
+                response: 'Failed to POST shoes',
                 error: err,
                 data: shoes
             });
         } else {
             res.json({
                 status: 200,
-                response: 'route to GET all Shoes',
+                response: 'Shoe successfully POSTed.',
                 data: shoes
             })
         }
