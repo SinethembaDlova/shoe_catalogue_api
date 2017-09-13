@@ -1,4 +1,9 @@
-.navbar .navbar-fixed-top .mb-5
+#navBar
 {
   background-color: black;
+}
+
+#brandText
+{
+  color: white;
 }
