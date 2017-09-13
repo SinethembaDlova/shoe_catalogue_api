@@ -21,6 +21,7 @@ var shoeAPISchema = mongoose.Schema({
     },
     color: String,
     brand: String,
+    size : Number,
     price: Number,
     in_stock: Number
 });
