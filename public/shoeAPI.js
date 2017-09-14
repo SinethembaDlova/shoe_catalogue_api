@@ -1,7 +1,8 @@
 //Get access to my HTML elements
 var addButton = document.querySelector("#addButton");
 var buyButton = document.querySelector("#buyButton");
-
+var brandSelect = document.querySelector("#brandSelect");
+var sizeSelect = document.querySelector("#sizeSelect");
 
 
 
