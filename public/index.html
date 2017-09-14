@@ -15,6 +15,8 @@
 </head>
 
 <body>
+
+  <!--Navigation bar-->
     <nav class="navbar navbar-fixed-top mb-3 py-3" id="navBar">
         <div class="container">
             <a class="navbar-brand mr-0" href="/"><h2 id="brandText">Shoe API</h2></a>
@@ -29,40 +31,35 @@
         </div>
     </nav>
 
+    <!-- Add shoe button -->
     <div class="row">
         <div class="container">
-            <button class="positive ui button py-3 float-right" type="button" name="button"> <i class="add icon"></i> Add Shoe</button>
+            <button class="positive ui button py-3 float-right" type="button" name="button" id="addButton"> <i class="add icon"></i> Add Shoe</button>
         </div>
     </div>
 
+    <!--Dropdown menus for filtering  -->
     <div class="container">
         <div class="row my-3">
             <div class="col-md-6">
-                <div class="ui fluid search selection dropdown bg-dark text-secondary">
-                    <input type="hidden" name="country">
-                    <i class="dropdown icon"></i>
-                    <div class="default text"><b>Filter By Brand</b></div>
-                    <div class="menu">
-                        <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
-                        <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
-                    </div>
-                </div>
+                <select class="ui fluid dropdown bg-dark text-secondary">
+                  <option value="">Filter By Brand</option>
+                  <option value="1">Adidas</option>
+                  <option value="0">Nike</option>
+                </select>
             </div>
 
             <div class="col-md-6">
-                <div class="ui fluid search selection dropdown bg-dark text-secondary">
-                    <input type="hidden" name="country">
-                    <i class="dropdown icon"></i>
-                    <div class="default text"><b>Filter By Size</b></div>
-                    <div class="menu">
-                        <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
-                        <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
-                    </div>
-                </div>
+                <select class="ui fluid dropdown bg-dark text-secondary">
+                <option value=""><b>Filter By Size</b></option>
+                <option value="1"><b>6</b></option>
+                <option value="0"><b>8</b></option>
+              </select>
             </div>
         </div>
     </div>
 
+    <!--Shoe template  -->
     <div class="row ">
         <div class="container">
             <div class="col-md-4">
@@ -74,20 +71,20 @@
                         <div class="content">
                             <div class="header">Adidas</div>
                             <div class="description">
-                                Blue <br>
-                                Size 6 <br>
-                                5 in stock <br>
-                                R500
+                                Color : Blue <br> Size : 6 <br> Stock : 10 <br> Price : R500
                             </div>
                         </div>
                         <div class="extra content">
-                            <button class="ui button float-right bg-primary text-white">Buy Shoe</button>
+                            <button class="ui button float-right bg-primary text-white" id="buyButton">Buy Shoe</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!--The modal to add shoes  -->
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
