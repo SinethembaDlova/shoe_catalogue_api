@@ -19,8 +19,8 @@ var shoeAPISchema = mongoose.Schema({
         unique: true,
         sparse: true
     },
-    color: String,
     brand: String,
+    color: String,
     size : Number,
     price: Number,
     in_stock: Number

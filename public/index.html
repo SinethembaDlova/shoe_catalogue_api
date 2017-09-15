@@ -9,21 +9,67 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <!--Symentic UI  CSS-->
-    <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/semantic/semantic.min.css">
     <!--My own CSS  -->
     <link rel="stylesheet" href="/shoeAPI.css">
+    <!-- Linking handle bars -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js"></script>
 </head>
 
 <body>
+    <!-- My shoe handlebars template -->
+    <script type="text/handlebars-x" id="shoeTemplate">
+        {{#each shoe}}
+        <div class="card">
+            <div class="image">
+                <img id="shoeImage" src="{{img}}">
+            </div>
+            <div class="content">
+                <div class="header">{{brand}}</div>
+                <div class="description">
+                    Color : {{color}} <br> Size : {{size}} <br> Stock : {{stock}} <br> Price : R{{price}}
+                </div>
+            </div>
+            <div class="extra content">
+                <button class="ui button float-right bg-primary text-white right labeled icon" id="buyButton">Buy Shoe <i class="add to cart icon"></i></button>
+            </div>
+        </div>
+        {{/each}}
+    </script>
 
-  <!--Navigation bar-->
+    <!--My filter template  -->
+
+    <script type="text/handlebars-x" id="filterTemplate">
+        <div class="row my-3">
+            <div class="col-md-6">
+                <select class="ui fluid dropdown bg-dark text-secondary" id="brandSelect">
+            <option value="">All Brands</option>
+            {{#each brandFilter}}
+              <option value="{{this}}">{{this}}</option>
+            {{/each}}
+          </select>
+            </div>
+
+            <div class="col-md-6">
+                <select class="ui fluid dropdown bg-dark text-secondary" id="sizeSelect">
+          <option value="">All Sizes</option>
+          {{#each sizeFilter}}
+            <option value="{{this}}">{{this}}></option>
+          {{/each}}
+        </select>
+            </div>
+        </div>
+    </script>
+
+
+    <!--Navigation bar-->
     <nav class="navbar navbar-fixed-top mb-3 py-3" id="navBar">
         <div class="container">
             <a class="navbar-brand mr-0" href="/"><h2 id="brandText">Shoe API</h2></a>
             <div class="right menu">
                 <div class="item">
                     <div class="ui icon input">
-                        <input type="text" placeholder="Search...">
+                        <input type="text" name="" placeholder="Search...">
                         <i class="search link icon"></i>
                     </div>
                 </div>
@@ -34,29 +80,13 @@
     <!-- Add shoe button -->
     <div class="row">
         <div class="container">
-            <button class="positive ui button py-3 float-right" type="button" name="button" id="addButton"> <i class="add icon"></i> Add Shoe</button>
+            <button class="positive ui button py-3 float-right right labeled icon" type="button" name="button" id="addButton"> <i class="add icon"></i> Add Shoe</button>
         </div>
     </div>
 
     <!--Dropdown menus for filtering  -->
-    <div class="container">
-        <div class="row my-3">
-            <div class="col-md-6">
-                <select class="ui fluid dropdown bg-dark text-secondary" id="brandSelect">
-                  <option value="">Filter By Brand</option>
-                  <option value="1">Adidas</option>
-                  <option value="0">Nike</option>
-                </select>
-            </div>
+    <div class="container" id="filterPlace">
 
-            <div class="col-md-6">
-                <select class="ui fluid dropdown bg-dark text-secondary" id="sizeSelect">
-                <option value=""><b>Filter By Size</b></option>
-                <option value="1"><b>6</b></option>
-                <option value="0"><b>8</b></option>
-              </select>
-            </div>
-        </div>
     </div>
 
     <!--Shoe template  -->
@@ -75,7 +105,7 @@
                             </div>
                         </div>
                         <div class="extra content">
-                            <button class="ui button float-right bg-primary text-white" id="buyButton">Buy Shoe</button>
+                            <button class="ui button float-right bg-primary text-white right labeled icon" id="buyButton">Buy Shoe <i class="add to cart icon"></i></button>
                         </div>
                     </div>
                 </div>
@@ -84,8 +114,57 @@
     </div>
 
     <!--The modal to add shoes  -->
+    <div class="ui tiny modal" id="addModal">
+        <i class="close icon"></i>
+        <div class="header">
+            Upload A Shoe
+        </div>
+        <div class="image content">
+            <div class="description">
+                <div class="ui inverted segment">
+                    <div class="ui fluid inverted input">
+                        <input class="text-center" type="text" name="id" placeholder="Please enter a unique ID?">
+                    </div>
+                    <div class="ui inverted divider"></div>
+                    <div class="ui fluid inverted input">
+                        <input class="text-center" type="text" name="brand" placeholder="Please enter a brand?">
+                    </div>
+                    <div class="ui inverted divider"></div>
+                    <div class="ui fluid inverted input">
+                        <input class="text-center" type="text" name="image" placeholder="Please enter where the image is located?">
+                    </div>
+                    <div class="ui inverted divider"></div>
+                    <div class="ui fluid inverted input">
+                        <input class="text-center" type="text" name="color" placeholder="Please enter the shoe color?">
+                    </div>
+                    <div class="ui inverted divider"></div>
+                    <div class="ui fluid inverted input">
+                        <input class="text-center" type="text" name="size" placeholder="Please enter the size?">
+                    </div>
+                    <div class="ui inverted divider"></div>
+                    <div class="ui fluid inverted input">
+                        <input class="text-center" type="text" name="price" placeholder="How much is the price?">
+                    </div>
+                    <div class="ui inverted divider"></div>
+                    <div class="ui fluid inverted input">
+                        <input class="text-center" type="text" name="in_stock" placeholder="Please enter stock number?">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui negative deny right labeled icon button">
+                Cancel
+                <i class="remove icon"></i>
+            </div>
+            <div class="ui positive right labeled icon button">
+                Upload
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
+    </div>
 
-
+    <script src="/shoeAPI.js" charset="utf-8"></script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -93,7 +172,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     <!--Symentic UI  JS-->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="semantic/semantic.min.js"></script>
+    <script src="/semantic/semantic.min.js"></script>
 </body>
 
 </html>
