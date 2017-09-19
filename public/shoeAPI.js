@@ -4,6 +4,15 @@ var buyButton = document.querySelector("#buyButton");
 var brandSelect = document.querySelector("#brandSelect");
 var sizeSelect = document.querySelector("#sizeSelect");
 var filterPlace = document.querySelector("#filterPlace");
+var shoeCat = document.querySelector('#shoeCat');
+
+//Compliling my shoe template
+var shoeTemplate = document.querySelector("#shoeTemplate").innerHTML;
+var shoeTemplateInstance = Handlebars.compile(shoeTemplate);
+var shoeResults = shoeTemplateInstance({
+    shoe: ''
+});
+shoeCat.innerHTML += shoeResults;
 
 
 //Compling  my filter templates
@@ -24,8 +33,16 @@ var filterResults = filterTemplateInstance({
 filterPlace.innerHTML = filterResults;
 
 
-//event listener that listens to my HTML elements
+//My goblal variables
+var url = 'http://localhost:5000/api/shoes';
+//var brand = brandSelect.value;
+//var size =  sizeSelect.value;
 
+
+
+
+
+//event listener that listens to my HTML elements
 addButton.addEventListener('click', function() {
   $('.ui.tiny.modal').modal('show');
 })
