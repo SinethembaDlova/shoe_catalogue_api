@@ -20,6 +20,7 @@ var shoeAPISchema = mongoose.Schema({
         sparse: true
     },
     brand: String,
+    image: String,
     color: String,
     size : Number,
     price: Number,

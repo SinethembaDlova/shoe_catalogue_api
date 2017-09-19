@@ -9,10 +9,6 @@ var shoeCat = document.querySelector('#shoeCat');
 //Compliling my shoe template
 var shoeTemplate = document.querySelector("#shoeTemplate").innerHTML;
 var shoeTemplateInstance = Handlebars.compile(shoeTemplate);
-var shoeResults = shoeTemplateInstance({
-    shoe: ''
-});
-shoeCat.innerHTML += shoeResults;
 
 
 //Compling  my filter templates
@@ -39,28 +35,26 @@ var url = 'http://localhost:5000/api/shoes';
 //var size =  sizeSelect.value;
 
 
+//Getting all shoes with AJAX
+function getAllShoes() {
+  $.ajax({
+      url: url,
+      type: "get"
+  }).done(function(data) {
+      console.log(data);
+      //var d = JSON.parse(data.data);
+      shoeCat.innerHTML += shoeTemplateInstance({
+          shoe: data.data
+      });
+      //shoeCat.innerHTML = shoeResults;
+  })
+}
+
+getAllShoes();
 
 
 
 //event listener that listens to my HTML elements
 addButton.addEventListener('click', function() {
-  $('.ui.tiny.modal').modal('show');
+    $('.ui.tiny.modal').modal('show');
 })
-
-
-
-
-
-/*
-$.ajax({
-    url: "http://demo.steltix.com/jderest/dataservice",
-    // <<- can also try http://demo.steltix.com/jderest/formservice with example request object below"
-    type: "post",
-    contentType: "application/json",
-    data: JSON.stringify(reqData)
-}).done(function(data) {
-    console.log(JSON.stringify(data))
-    // <<- log data to console
-})
-}
-*/

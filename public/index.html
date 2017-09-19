@@ -22,18 +22,20 @@
     <!-- My shoe handlebars template -->
     <script type="text/handlebars-x" id="shoeTemplate">
         {{#each shoe}}
-        <div class="card">
-            <div class="image">
-                <img id="shoeImage" src="{{img}}">
-            </div>
-            <div class="content">
-                <div class="header">{{brand}}</div>
-                <div class="description">
-                    Color : {{color}} <br> Size : {{size}} <br> Stock : {{stock}} <br> Price : R{{price}}
+        <div class="ui link cards" id="symenticCard">
+            <div class="card">
+                <div class="image">
+                    <img id="shoeImage" src="{{image}}">
                 </div>
-            </div>
-            <div class="extra content">
-                <button class="ui button float-right bg-primary text-white right labeled icon" id="buyButton">Buy Shoe <i class="add to cart icon"></i></button>
+                <div class="content">
+                    <div class="header">{{brand}}</div>
+                    <div class="description">
+                        Color : {{color}} <br> Size : {{size}} <br> Stock : {{in_stock}} <br> Price : R{{price}}
+                    </div>
+                </div>
+                <div class="extra content">
+                    <button class="ui button float-right bg-primary text-white right labeled icon" id="buyButton">Buy Shoe <i class="add to cart icon"></i></button>
+                </div>
             </div>
         </div>
         {{/each}}
@@ -94,8 +96,8 @@
     <!--Shoe template  -->
     <div class="row ">
         <div class="container">
-            <div class="col-md-4" id="shoeCat">
-                <div class="ui link cards">
+            <div class="col-md-12" id="shoeCat">
+                <div class="ui link cards col-md-4" id="symenticCard">
                     <div class="card">
                         <div class="image">
                             <img id="shoeImage" src="http://demandware.edgesuite.net/aaqx_prd/on/demandware.static/-/Sites-adidas-products/en_US/dw897a3b05/zoom/S80131_01_standard.jpg">
