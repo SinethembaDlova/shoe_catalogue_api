@@ -61,49 +61,52 @@ function getAllShoes() {
 }
 getAllShoes();
 
+/*
 //targeting my HTML from the frontend
-//var brandSelect = document.querySelector("#brandSelect");
-//var sizeSelect = document.querySelector("#sizeSelect");
-
-//my brand and sizes
+var brandSelect = document.querySelector("#brandSelect");
+var sizeSelect = document.querySelector("#sizeSelect");
+var brand = brandSelect.value;
+var size = sizeSelect.value;
 
 //Filter shoes from the DB
 function filterShoes() {
     if (brand === "All" && size === "All") {
         getAllShoes();
-      } else if (brand !== "All") {
+    }
+    else if (brand !== "All") {
         // AJAX call to render a particular brand
         $.ajax({
-          url: url + "/brand/" + brand,
-          type: "get"
+            url: url + "/brand/" + brand,
+            type: "get"
         }).done(function(data) {
-          //Render my shoes
-          shoeCat.innerHTML = shoeTemplateInstance({
-            shoe: data.data
-          });
+            //Render my shoes
+            shoeCat.innerHTML = shoeTemplateInstance({
+                shoe: data.data
+            });
         })
-      }
-
-    else {
-      // AJAX call to render a particular size
-      $.ajax({
-        url: url + "/size/" + size,
-        type: "get"
-      }).done(function(data) {
-        //Render my shoes
-        shoeCat.innerHTML = shoeTemplateInstance({
-          shoe: data.data
-        });
-      })
     }
+    else {
+        // AJAX call to render a particular size
+        $.ajax({
+            url: url + "/size/" + size,
+            type: "get"
+        }).done(function(data) {
+            //Render my shoes
+            shoeCat.innerHTML = shoeTemplateInstance({
+                shoe: data.data
+            });
+        })
     }
 }
-
+*/
 
 //event listener that listens to my HTML elements
 addButton.addEventListener('click', function() {
     $('.ui.tiny.modal').modal('show');
 });
-filterDiv.addEventListener('change', function(e){
-  console.log("e.target");
+buyButton.addEventListener('click', function(){
+    $('.ui.mini.modal').modal('show');
+});
+filterDiv.addEventListener('change', function() {
+    console.log("e.target");
 });
