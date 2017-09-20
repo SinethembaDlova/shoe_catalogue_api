@@ -42,29 +42,29 @@
     </script>
 
     <!--My filter template  -->
+    <div class="filterDiv">
+        <script type="text/handlebars-x" id="filterTemplate">
+            <div class="row my-3">
+                <div class="col-md-6">
+                    <select class="ui fluid dropdown bg-dark text-secondary" id="brandSelect">
+              <option value="All">All Brands</option>
+              {{#each brandFilter}}
+                <option value="{{this}}">{{this}}</option>
+              {{/each}}
+            </select>
+                </div>
 
-    <script type="text/handlebars-x" id="filterTemplate">
-        <div class="row my-3">
-            <div class="col-md-6">
-                <select class="ui fluid dropdown bg-dark text-secondary" id="brandSelect">
-            <option value="">All Brands</option>
-            {{#each brandFilter}}
+                <div class="col-md-6">
+                    <select class="ui fluid dropdown bg-dark text-secondary" id="sizeSelect">
+            <option value="All">All Sizes</option>
+            {{#each sizeFilter}}
               <option value="{{this}}">{{this}}</option>
             {{/each}}
           </select>
+                </div>
             </div>
-
-            <div class="col-md-6">
-                <select class="ui fluid dropdown bg-dark text-secondary" id="sizeSelect">
-          <option value="">All Sizes</option>
-          {{#each sizeFilter}}
-            <option value="{{this}}">{{this}}</option>
-          {{/each}}
-        </select>
-            </div>
-        </div>
-    </script>
-
+        </script>
+    </div>
 
     <!--Navigation bar-->
     <nav class="navbar navbar-fixed-top mb-3 py-3" id="navBar">
