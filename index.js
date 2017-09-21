@@ -210,9 +210,17 @@ app.put('/api/shoes/sold/:id', function(req, res) {
 //	Add a new new shoe to his stock.
 app.post('/api/shoes', function(req, res) {
 
-    var addedItems = req.body;
+    console.log(req.body);
 
-    var shoe = new ShoeAPI({addedItems});
+    var shoe = new ShoeAPI({
+        id: req.body.id,
+        brand: req.body.brand,
+        image : req.body.image,
+        color: req.body.color,
+        size : req.body.size,
+        price: req.body.price,
+        in_stock: req.body.in_stock
+    });
 
     shoe.save(function(err, shoe) {
         if (err) {

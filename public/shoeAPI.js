@@ -128,14 +128,15 @@ function filterShoes() {
 // Posting shoes to the server
 function postShoe() {
     var shoeToUpload = {
-        id: document.querySelector("#addedId").value,
-        brand: document.querySelector("#addedBrand").value,
-        image: document.querySelector("#addedImage").value,
-        color: document.querySelector("#addedColor").value,
-        size: document.querySelector("#addedSize").value,
-        price: document.querySelector("#addedPrice").value,
-        in_stock: document.querySelector("#addedStock").value
+        "id": document.querySelector("#addedId").value,
+        "brand": document.querySelector("#addedBrand").value,
+        "image": document.querySelector("#addedImage").value,
+        "color": document.querySelector("#addedColor").value,
+        "size": document.querySelector("#addedSize").value,
+        "price": document.querySelector("#addedPrice").value,
+        "in_stock": document.querySelector("#addedStock").value
     }
+    console.log(JSON.stringify(shoeToUpload));
     $.ajax({
         url: url,
         type: "post",
