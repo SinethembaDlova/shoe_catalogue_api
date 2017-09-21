@@ -212,29 +212,21 @@ app.post('/api/shoes', function(req, res) {
 
     var addedItems = req.body;
 
-    var shoe = new ShoeAPI({
-        id: req.body.id,
-        brand: req.body.brand,
-        image : req.body.image,
-        color: req.body.color,
-        size : req.body.size,
-        price: req.body.price,
-        in_stock: req.body.in_stock
-    });
+    var shoe = new ShoeAPI({addedItems});
 
-    shoe.save(function(err, shoes) {
+    shoe.save(function(err, shoe) {
         if (err) {
             res.json({
                 status: 503,
                 response: 'Failed to POST shoes',
                 error: err,
-                data: shoes
+                data: shoe
             });
         } else {
             res.json({
                 status: 200,
                 response: 'Shoe successfully POSTed.',
-                data: shoes
+                data: shoe
             })
         }
     })
