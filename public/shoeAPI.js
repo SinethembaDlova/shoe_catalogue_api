@@ -74,13 +74,24 @@ function filterShoes() {
   var brand = $('#brandSelect').find(':selected').val();
   var size = $('#sizeSelect').find(':selected').val();
 
-console.log("filterfuction");
     if (brand === "All" && size === "All") {
-      console.log("if all for both");
         getAllShoes();
     }
+
+    else if (brand !== "All" && size !== "All") {
+      //getting shoes with a particular brand and size
+      $.ajax({
+          url: url + "/brand/" + brand + "/size/" + size,
+          type: "get"
+      }).done(function(data) {
+          console.log("Filtered brand", data.data);
+          //Render my shoes
+          shoeCat.innerHTML = shoeTemplateInstance({
+              shoe: data.data
+          });
+      })
+    }
     else if (brand !== "All") {
-        console.log("else if block for brand");
         // AJAX call to render a particular brand
         $.ajax({
             url: url + "/brand/" + brand,
@@ -119,6 +130,10 @@ console.log('ready---->');
       $('.ui.mini.modal').modal('show');
   });*/
   $('#brandSelect').on('change', function(){
+    filterShoes();
+  });
+
+  $('#sizeSelect').on('change', function(){
     filterShoes();
   });
 });
