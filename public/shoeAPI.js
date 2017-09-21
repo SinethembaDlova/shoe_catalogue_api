@@ -40,7 +40,7 @@ function getAllShoes() {
         console.log(data.data);
         for (var i = 0; i < shoeData.length; i++) {
 
-            if (brandMap[shoeData.brand] === undefined) {
+            if (brandMap[shoeData[i].brand] === undefined) {
                 brandMap[shoeData[i].brand] = shoeData[i].brand;
                 brandNames.push(shoeData[i].brand);
             }
@@ -51,6 +51,7 @@ function getAllShoes() {
             }
         }
 
+
         // Rendering my filter template
         var filterResults = filterTemplateInstance({
             brandFilter: brandNames,
@@ -59,26 +60,33 @@ function getAllShoes() {
         filterPlace.innerHTML = filterResults;
     })
 }
+
 getAllShoes();
 
-/*
 //targeting my HTML from the frontend
 var brandSelect = document.querySelector("#brandSelect");
 var sizeSelect = document.querySelector("#sizeSelect");
-var brand = brandSelect.value;
-var size = sizeSelect.value;
 
 //Filter shoes from the DB
 function filterShoes() {
+
+  console.log("*******");
+  var brand = $('#brandSelect').find(':selected').val();
+  var size = $('#sizeSelect').find(':selected').val();
+
+console.log("filterfuction");
     if (brand === "All" && size === "All") {
+      console.log("if all for both");
         getAllShoes();
     }
     else if (brand !== "All") {
+        console.log("else if block for brand");
         // AJAX call to render a particular brand
         $.ajax({
             url: url + "/brand/" + brand,
             type: "get"
         }).done(function(data) {
+            console.log("Filtered brand", data.data);
             //Render my shoes
             shoeCat.innerHTML = shoeTemplateInstance({
                 shoe: data.data
@@ -87,6 +95,7 @@ function filterShoes() {
     }
     else {
         // AJAX call to render a particular size
+        console.log("else if block for brand");
         $.ajax({
             url: url + "/size/" + size,
             type: "get"
@@ -98,15 +107,18 @@ function filterShoes() {
         })
     }
 }
-*/
 
-//event listener that listens to my HTML elements
-addButton.addEventListener('click', function() {
-    $('.ui.tiny.modal').modal('show');
-});
-buyButton.addEventListener('click', function(){
-    $('.ui.mini.modal').modal('show');
-});
-filterDiv.addEventListener('change', function() {
-    console.log("e.target");
+$(document).ready(function(){
+console.log('ready---->');
+
+  //event listener that listens to my HTML elements
+  addButton.addEventListener('click', function() {
+      $('.ui.tiny.modal').modal('show');
+  });
+  /*buyButton.addEventListener('click', function(){
+      $('.ui.mini.modal').modal('show');
+  });*/
+  $('#brandSelect').on('change', function(){
+    filterShoes();
+  });
 });
