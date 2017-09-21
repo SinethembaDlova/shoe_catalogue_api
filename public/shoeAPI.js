@@ -22,19 +22,17 @@ var sizeMap = {};
 
 //home route
 var url = 'http://localhost:5000/api/shoes';
-
-
+var createFilters = false;
 
 //Getting all shoes with AJAX
 function getAllShoes() {
+
     $.ajax({
         url: url,
         type: "get"
     }).done(function(data) {
-        //Render my shoes
-        shoeCat.innerHTML = shoeTemplateInstance({
-            shoe: data.data
-        });
+
+      if (!createFilters) {
         //avoid duplicate for my dropdown
         var shoeData = data.data;
         console.log(data.data);
@@ -58,6 +56,14 @@ function getAllShoes() {
             sizeFilter: sizeNumbers
         });
         filterPlace.innerHTML = filterResults;
+        
+        createFilters = true;
+      }
+
+        //Render my shoes
+        shoeCat.innerHTML = shoeTemplateInstance({
+            shoe: data.data
+        });
     })
 }
 
@@ -74,12 +80,10 @@ function filterShoes() {
   var brand = $('#brandSelect').find(':selected').val();
   var size = $('#sizeSelect').find(':selected').val();
 
-    if (brand === "All" && size === "All") {
-        getAllShoes();
-    }
 
-    else if (brand !== "All" && size !== "All") {
+    if (brand !== "All" && size !== "All") {
       //getting shoes with a particular brand and size
+      console.log("else if block for brand and size");
       $.ajax({
           url: url + "/brand/" + brand + "/size/" + size,
           type: "get"
@@ -93,6 +97,7 @@ function filterShoes() {
     }
     else if (brand !== "All") {
         // AJAX call to render a particular brand
+        console.log("else if block for brand");
         $.ajax({
             url: url + "/brand/" + brand,
             type: "get"
@@ -104,9 +109,9 @@ function filterShoes() {
             });
         })
     }
-    else {
+    else if(size !== "All"){
         // AJAX call to render a particular size
-        console.log("else if block for brand");
+        console.log("else if block for size");
         $.ajax({
             url: url + "/size/" + size,
             type: "get"
@@ -116,6 +121,10 @@ function filterShoes() {
                 shoe: data.data
             });
         })
+    }
+
+    else {
+      getAllShoes();
     }
 }
 
