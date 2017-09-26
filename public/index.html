@@ -155,28 +155,32 @@
 
     <!--Buying modal  -->
     <div class="ui mini modal" id="buyModal">
-      <i class="close icon"></i>
-      <div class="header">
-          Buy the shoe
-      </div>
-      <div class="image content">
-          <div class="description">
-              <div class="ui inverted segment">
-
-              </div>
-          </div>
-      </div>
-      <div class="actions">
-          <div class="ui negative deny right labeled icon button">
-              Cancel
-              <i class="remove icon"></i>
-          </div>
-          <div class="ui positive right labeled icon button">
-              Buy
-              <i class="add to cart icon"></i>
-          </div>
-      </div>
+        <i class="close icon"></i>
+        <div class="header">
+            Buy the shoe
+        </div>
+        <div class="image content">
+            <div class="description">
+                <div class="ui inverted segment">
+                    <div class="ui fluid inverted input">
+                        <input class="text-center" type="text" name="ammount" id="howmany" placeholder="How many shoes do want to buy?">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui negative deny right labeled icon button">
+                Cancel
+                <i class="remove icon"></i>
+            </div>
+            <div class="ui positive right labeled icon button" id="confirmBuy" onclick="buyShoe({{id}})">
+                Buy
+                <i class="add to cart icon"></i>
+            </div>
+        </div>
     </div>
+
+
 
     <script src="/shoeAPI.js" charset="utf-8"></script>
     <!-- Optional JavaScript -->

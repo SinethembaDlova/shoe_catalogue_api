@@ -1,7 +1,6 @@
 //Get access to my HTML elements
 var addButton = document.querySelector("#addButton");
 var uploadButton = document.querySelector("#uploadButton");
-var buyButton = document.querySelector("#buyButton");
 var filterPlace = document.querySelector("#filterPlace");
 var shoeCat = document.querySelector('#shoeCat');
 var filterDiv = document.querySelector('.filterDiv')
@@ -148,7 +147,20 @@ function postShoe() {
         getAllShoes();
     })
 }
+function buyShoe(id){
+  console.log(id);
+  var ammount = document.querySelector("#howmany").value;
+  console.log(JSON.stringify(ammount));
 
+  $.ajax({
+    url: url + '/sold/' + id,
+    type: "post",
+    data: JSON.stringify(ammount),
+    contentType: 'application/json',
+  }).done(function(data) {
+    console.log("You have successfully bought " + ammount + "shoes.");
+  })
+}
 
 
 $(document).ready(function() {
@@ -159,9 +171,9 @@ $(document).ready(function() {
         $('.ui.tiny.modal').modal('show');
     });
     uploadButton.addEventListener('click', postShoe);
-    /*buyButton.addEventListener('click', function(){
+    $("#buyButton").on('click', function(){
         $('.ui.mini.modal').modal('show');
-    });*/
+    });
     $('#brandSelect').on('change', function() {
         filterShoes();
     });

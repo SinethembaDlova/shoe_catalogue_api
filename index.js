@@ -171,11 +171,13 @@ app.get('/api/shoes/brand/:brandname/size/:size', function(req, res) {
 });
 
 //	Update the stock levels when a shoe is sold
-app.put('/api/shoes/sold/:id', function(req, res) {
+app.post('/api/shoes/sold/:id', function(req, res) {
 
-    var ammount = req.body.ammount
-    var brandID = req.params.id
+    var ammount = req.body.ammount;
+    var brandID = req.params.id;
 
+    console.log(brandID);
+    
     ShoeAPI.findOne({
         id: brandID
     }, function(err, shoes) {
