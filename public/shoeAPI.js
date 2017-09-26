@@ -147,13 +147,22 @@ function postShoe() {
         getAllShoes();
     })
 }
-function buyShoe(id){
+var lastId;
+//Creating a modal.
+function uniqueModal(id) {
+  $('.ui.mini.modal').modal('show');
+  lastId = id;
+}
+
+function buyShoe(){
+
+  var id = lastId
   console.log(id);
   var ammount = document.querySelector("#howmany").value;
   console.log(JSON.stringify(ammount));
 
   $.ajax({
-    url: url + '/sold/' + id,
+    url: url + "/sold/" + id,
     type: "post",
     data: JSON.stringify(ammount),
     contentType: 'application/json',
@@ -171,9 +180,7 @@ $(document).ready(function() {
         $('.ui.tiny.modal').modal('show');
     });
     uploadButton.addEventListener('click', postShoe);
-    $("#buyButton").on('click', function(){
-        $('.ui.mini.modal').modal('show');
-    });
+
     $('#brandSelect').on('change', function() {
         filterShoes();
     });

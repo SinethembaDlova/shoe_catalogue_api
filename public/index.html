@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="extra content">
-                    <button class="ui button float-right bg-primary text-white right labeled icon" id="buyButton">Buy Shoe <i class="add to cart icon"></i></button>
+                    <button onclick="uniqueModal({{id}})" class="ui button float-right bg-primary text-white right labeled icon" id="buyButton">Buy Shoe <i class="add to cart icon"></i></button>
                 </div>
             </div>
         </div>
@@ -173,7 +173,7 @@
                 Cancel
                 <i class="remove icon"></i>
             </div>
-            <div class="ui positive right labeled icon button" id="confirmBuy" onclick="buyShoe({{id}})">
+            <div class="ui positive right labeled icon button" id="confirmBuy" onclick="buyShoe()">
                 Buy
                 <i class="add to cart icon"></i>
             </div>

@@ -172,19 +172,20 @@ app.get('/api/shoes/brand/:brandname/size/:size', function(req, res) {
 
 //	Update the stock levels when a shoe is sold
 app.post('/api/shoes/sold/:id', function(req, res) {
-
-    var ammount = req.body.ammount;
+console.log("Sinethemba Im here");
+    var ammount = Number(req.body.ammount);
     var brandID = req.params.id;
 
-    console.log(brandID);
-    
+    console.log("You want to buy " + ammount + " shoes.");
+    //console.log(brandID);
+
     ShoeAPI.findOne({
         id: brandID
     }, function(err, shoes) {
         if (err) {
           res.json({
               status: 500,
-              response: 'Failed to UPDATE a query for this shoe ID',
+              response: 'Failed to find a shoe for this shoe ID',
               error: err
           });
         } else {
