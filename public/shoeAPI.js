@@ -145,6 +145,7 @@ function postShoe() {
     }).done(function(data) {
         console.log('Shoe successfully added');
         console.log(JSON.stringify(data));
+        getAllShoes();
     })
 }
 
