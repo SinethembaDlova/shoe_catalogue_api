@@ -90,7 +90,7 @@ app.get('/api/shoes/brand/:brandname', function(req, res) {
     var shoeBrand = req.params.brandname;
 
     ShoeAPI.find({
-        brand: shoeBrand
+         brand: { $regex: shoeBrand}
     }, function(err, thisBrand) {
 
         if (err) {

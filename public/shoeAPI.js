@@ -73,6 +73,28 @@ getAllShoes();
 var brandSelect = document.querySelector("#brandSelect");
 var sizeSelect = document.querySelector("#sizeSelect");
 
+function searchBrand() {
+
+  var brand = document.querySelector("#searchBrand").value;
+  console.log(brand);
+  if (brand === '') {
+    getAllShoes();
+  }
+  else {
+    $.ajax({
+      url: url + "/brand/" + brand,
+      type: "get"
+    }).done(function(data) {
+      console.log("Searched brand", data.data);
+      //Render my shoes
+      shoeCat.innerHTML = shoeTemplateInstance({
+        shoe: data.data
+      });
+    });
+  }
+}
+
+
 //Filter shoes from the DB
 function filterShoes() {
 
@@ -176,17 +198,21 @@ function buyShoe(){
 $(document).ready(function() {
     console.log('ready---->');
 
-    //event listener that listens to my HTML elements
+    //event lister for add modal
     addButton.addEventListener('click', function() {
         $('.ui.tiny.modal').modal('show');
     });
+    //eventlistener for upload shoe button
     uploadButton.addEventListener('click', postShoe);
-
+    //eventlistener for brand filter
     $('#brandSelect').on('change', function() {
         filterShoes();
     });
-
+    //eventlistener for sizefilter
     $('#sizeSelect').on('change', function() {
         filterShoes();
+    });
+    $('#searchBrand').keyup(function(){
+      searchBrand();
     });
 });
