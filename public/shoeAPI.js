@@ -156,18 +156,19 @@ function uniqueModal(id) {
 
 function buyShoe(){
 
-  var id = lastId
+  var id = Number(lastId);
   console.log(id);
-  var ammount = document.querySelector("#howmany").value;
+  var ammount = {ammount: document.querySelector("#howmany").value};
   console.log(JSON.stringify(ammount));
 
   $.ajax({
     url: url + "/sold/" + id,
     type: "post",
     data: JSON.stringify(ammount),
-    contentType: 'application/json',
+    contentType: 'application/json'
   }).done(function(data) {
     console.log("You have successfully bought " + ammount + "shoes.");
+    getAllShoes();
   })
 }
 

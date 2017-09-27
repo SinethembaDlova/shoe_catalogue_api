@@ -174,8 +174,9 @@ app.get('/api/shoes/brand/:brandname/size/:size', function(req, res) {
 app.post('/api/shoes/sold/:id', function(req, res) {
 console.log("Sinethemba Im here");
     var ammount = Number(req.body.ammount);
+    console.log(ammount);
     var brandID = req.params.id;
-
+    console.log(brandID);
     console.log("You want to buy " + ammount + " shoes.");
     //console.log(brandID);
 
@@ -201,7 +202,7 @@ console.log("Sinethemba Im here");
                   res.json({
                       status: 200,
                       response: 'Got a UPDATE query for this shoe brand ID.',
-                      data: thisBrand
+                      data: updatedStock
                   });
                 }
             })
