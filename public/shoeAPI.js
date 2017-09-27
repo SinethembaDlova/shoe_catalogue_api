@@ -60,6 +60,12 @@ function getAllShoes() {
             createFilters = true;
         }
 
+        //handle sold out items
+        if (data.data.in_stock <= 0) {
+          document.querySelector("#buyButton").style.display = "none";
+          document.querySelector("#soldOutAlert").style.display = "block";
+        }
+
         //Render my shoes
         shoeCat.innerHTML = shoeTemplateInstance({
             shoe: data.data
@@ -86,6 +92,7 @@ function searchBrand() {
       type: "get"
     }).done(function(data) {
       console.log("Searched brand", data.data);
+
       //Render my shoes
       shoeCat.innerHTML = shoeTemplateInstance({
         shoe: data.data

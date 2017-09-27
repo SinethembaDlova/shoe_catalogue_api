@@ -65,13 +65,13 @@ app.use(function(req, res, next) {
 //getting my routes
 //	List all shoes in stock
 app.get('/api/shoes', function(req, res) {
-    ShoeAPI.find({}, function(err, shoes) {
+    ShoeAPI.find({}, null, {sort: {brand : 1}}, function(err, shoes) {
         if (err) {
             res.json({
                 response: 'Failed to GET a query for all shoes.',
                 error: err,
                 status: 500,
-                data: results
+                data: shoes
             });
         } else {
             res.json({
@@ -91,7 +91,8 @@ app.get('/api/shoes/brand/:brandname', function(req, res) {
 
     ShoeAPI.find({
          brand: { $regex: shoeBrand}
-    }, function(err, thisBrand) {
+
+    }, null, {sort: {brand : 1}}, function(err, thisBrand) {
 
         if (err) {
             res.json({
@@ -119,7 +120,7 @@ app.get('/api/shoes/size/:size', function(req, res) {
 
   ShoeAPI.find({
       size: shoeSize
-  }, function(err, thisBrand) {
+  },null, {sort: {brand : 1}}, function(err, thisBrand) {
 
       if (err) {
           res.json({
@@ -150,7 +151,7 @@ app.get('/api/shoes/brand/:brandname/size/:size', function(req, res) {
   ShoeAPI.find({
       brand: shoeBrand,
       size: shoeSize
-  }, function(err, thisBrand) {
+  }, null, {sort: {brand : 1}}, function(err, thisBrand) {
 
       if (err) {
           res.json({
