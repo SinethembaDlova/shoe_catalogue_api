@@ -24,7 +24,7 @@ var shoeAPISchema = mongoose.Schema({
     color: String,
     size : Number,
     price: Number,
-    in_stock: Number
+    in_stock: {type: Number, default: 0}
 });
 
 shoeAPISchema.index({
@@ -192,6 +192,9 @@ console.log("Sinethemba Im here");
           });
         } else {
             shoes.in_stock = shoes.in_stock - ammount;
+            if (shoes.in_stock < 0) {
+              shoes.in_stock = 0;
+            }
             shoes.save(function(err, updatedStock) {
                 if (err) {
                   res.json({

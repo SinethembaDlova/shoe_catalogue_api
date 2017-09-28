@@ -30,14 +30,17 @@
                 <div class="content">
                     <div class="header">{{brand}}</div>
                     <div class="description">
-                        Color : {{color}} <br> Size : {{size}} <br> Stock : {{in_stock}} <br> Price : R{{price}}
+                        Color : {{color}} <br> Size : {{size}} <br> Stock : {{#if in_stock}}{{in_stock}} {{else}}sold out{{/if}} <br> Price : R{{price}}
                     </div>
                 </div>
                 <div class="extra content">
-                    <div class="alert alert-danger text-center" role="alert" id="soldOutAlert">
-                        <b>This shoe is sold out</b>
-                    </div>
+                    {{#if in_stock}}
                     <button onclick="uniqueModal({{id}})" class="ui button float-right bg-primary text-white right labeled icon" id="buyButton">Buy Shoe <i class="add to cart icon"></i></button>
+                    {{else}}
+                    <div class="alert alert-danger text-center" role="alert" id="soldOutAlert">
+                    <b>This shoe is sold out</b>
+                    </div>
+                    {{/if}}
                 </div>
             </div>
         </div>
@@ -185,8 +188,12 @@
                     <div class="ui fluid inverted input">
                         <input class="text-center" type="text" name="ammount" id="howmany" placeholder="How many shoes do want to buy?">
                     </div>
+                    <div class="alert alert-danger text-center mt-2" role="alert" id="#ammountInputAlert">
+                      <b>Please enter an ammount.</b>
+                    </div>
                 </div>
             </div>
+
         </div>
         <div class="actions">
             <div class="ui negative deny right labeled icon button">

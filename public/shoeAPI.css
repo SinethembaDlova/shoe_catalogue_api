@@ -24,10 +24,6 @@
   display: inline-block;
 }
 
-#soldOutAlert
-{
-  /*display: none;*/
-}
 
 #shoeUploadAlert
 {
@@ -37,4 +33,9 @@
 #buyShoeAlert
 {
   display: none
+}
+
+#ammountInputAlert
+{
+  display: none;
 }
