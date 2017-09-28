@@ -23,7 +23,7 @@ var sizeMap = {};
 
 
 //home route
-var url = 'http://localhost:5000/api/shoes';
+var url = '/api/shoes';
 var createFilters = false;
 
 //Getting all shoes with AJAX
