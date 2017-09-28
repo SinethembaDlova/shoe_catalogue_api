@@ -47,7 +47,7 @@
     <!--My filter template  -->
     <div class="filterDiv">
         <script type="text/handlebars-x" id="filterTemplate">
-            <div class="row my-3">
+            <div class="row my-1">
                 <div class="col-md-6">
                     <select class="ui fluid dropdown bg-dark text-secondary" id="brandSelect">
               <option value="All">All Brands</option>
@@ -87,8 +87,19 @@
     <!-- Add shoe button -->
     <div class="row">
         <div class="container">
-            <button class="positive ui button py-3 float-right right labeled icon" type="button" name="button" id="addButton"> <i class="add icon"></i> Add Shoe</button>
+            <button class="positive ui button py-3 float-right right labeled icon mb-3" type="button" name="button" id="addButton"> <i class="add icon"></i> Add Shoe</button>
         </div>
+    </div>
+
+    <!--Alert message when shoe is uploaded  -->
+    <div class="row">
+      <div class="container">
+        <div class="container">
+          <div class="alert alert-success text-center" role="alert" id="shoeUploadAlert">
+            <b>The shoe was successfully uploaded.</b>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!--Dropdown menus for filtering  -->

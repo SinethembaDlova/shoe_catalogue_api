@@ -106,7 +106,9 @@ function searchBrand() {
 
 //Filter shoes from the DB
 function filterShoes() {
-
+  //display the alert message as soon as we do another thing other after uploading shoe
+  document.querySelector("#shoeUploadAlert").style.display = "none";
+  
     console.log("*******");
     var brand = $('#brandSelect').find(':selected').val();
     var size = $('#sizeSelect').find(':selected').val();
@@ -176,9 +178,16 @@ function postShoe() {
         console.log('Shoe successfully added');
         console.log(JSON.stringify(data));
         getAllShoes();
+        document.querySelector("#shoeUploadAlert").style.display = "block";
     })
+
 }
+
+
+
+//A flag to capture a shoe id.
 var lastId;
+
 //Creating a modal.
 function uniqueModal(id) {
   $('.ui.mini.modal').modal('show');
