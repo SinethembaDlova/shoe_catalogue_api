@@ -20,6 +20,8 @@ var sizeNumbers = [];
 var brandMap = {};
 var sizeMap = {};
 
+
+
 //home route
 var url = 'http://localhost:5000/api/shoes';
 var createFilters = false;
@@ -53,7 +55,7 @@ function getAllShoes() {
             // Rendering my filter template
             var filterResults = filterTemplateInstance({
                 brandFilter: brandNames,
-                sizeFilter: sizeNumbers
+                sizeFilter: sizeNumbers.sort()
             });
             filterPlace.innerHTML = filterResults;
 
