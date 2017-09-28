@@ -108,7 +108,8 @@ function searchBrand() {
 function filterShoes() {
   //display the alert message as soon as we do another thing other after uploading shoe
   document.querySelector("#shoeUploadAlert").style.display = "none";
-  
+  document.querySelector("#buyShoeAlert").style.display = "none";
+
     console.log("*******");
     var brand = $('#brandSelect').find(':selected').val();
     var size = $('#sizeSelect').find(':selected').val();
@@ -209,6 +210,7 @@ function buyShoe(){
   }).done(function(data) {
     console.log("You have successfully bought " + ammount + "shoes.");
     getAllShoes();
+    document.querySelector("#buyShoeAlert").style.display = "block";
   })
 }
 
