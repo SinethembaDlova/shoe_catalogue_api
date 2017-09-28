@@ -77,32 +77,31 @@ var sizeSelect = document.querySelector("#sizeSelect");
 
 function searchBrand() {
 
-  var brand = document.querySelector("#searchBrand").value;
-  console.log(brand);
-  if (brand === '') {
-    getAllShoes();
-  }
-  else {
-    $.ajax({
-      url: url + "/brand/" + brand,
-      type: "get"
-    }).done(function(data) {
-      console.log("Searched brand", data.data);
+    var brand = document.querySelector("#searchBrand").value;
+    console.log(brand);
+    if (brand === '') {
+        getAllShoes();
+    } else {
+        $.ajax({
+            url: url + "/brand/" + brand,
+            type: "get"
+        }).done(function(data) {
+            console.log("Searched brand", data.data);
 
-      //Render my shoes
-      shoeCat.innerHTML = shoeTemplateInstance({
-        shoe: data.data
-      });
-    });
-  }
+            //Render my shoes
+            shoeCat.innerHTML = shoeTemplateInstance({
+                shoe: data.data
+            });
+        });
+    }
 }
 
 
 //Filter shoes from the DB
 function filterShoes() {
-  //display the alert message as soon as we do another thing other after uploading shoe
-  document.querySelector("#shoeUploadAlert").style.display = "none";
-  document.querySelector("#buyShoeAlert").style.display = "none";
+    //display the alert message as soon as we do another thing other after uploading shoe
+    document.querySelector("#shoeUploadAlert").style.display = "none";
+    document.querySelector("#buyShoeAlert").style.display = "none";
 
     console.log("*******");
     var brand = $('#brandSelect').find(':selected').val();
@@ -170,8 +169,6 @@ function postShoe() {
         data: JSON.stringify(shoeToUpload),
         contentType: 'application/json'
     }).done(function(data) {
-        console.log('Shoe successfully added');
-        console.log(JSON.stringify(data));
         getAllShoes();
         document.querySelector("#shoeUploadAlert").style.display = "block";
     })
@@ -185,28 +182,33 @@ var lastId;
 
 //Creating a modal.
 function uniqueModal(id) {
-  $('.ui.mini.modal').modal('show');
-  lastId = id;
+    $('.ui.mini.modal').modal('show');
+    lastId = id;
 }
 
-function buyShoe(){
+function buyShoe() {
 
-  var id = Number(lastId);
-  console.log(id);
-  var ammount = {ammount: document.querySelector("#howmany").value};
-  console.log(JSON.stringify(ammount));
+    var id = Number(lastId);
+    console.log(id);
+    var ammount = {
+        ammount: document.querySelector("#howmany").value
+    };
+    console.log(JSON.stringify(ammount));
 
-
-  $.ajax({
-    url: url + "/sold/" + id,
-    type: "post",
-    data: JSON.stringify(ammount),
-    contentType: 'application/json'
-  }).done(function(data) {
-    console.log("You have successfully bought " + ammount + "shoes.");
-    getAllShoes();
-    document.querySelector("#buyShoeAlert").style.display = "block";
-  })
+    if (ammount === "" || ammount === " " || ammount === "  " || ammount === "   ") {
+        document.querySelector("#ammountInputAlert").style.display = "block"
+    } else {
+        $.ajax({
+            url: url + "/sold/" + id,
+            type: "post",
+            data: JSON.stringify(ammount),
+            contentType: 'application/json'
+        }).done(function(data) {
+            console.log("You have successfully bought " + ammount + "shoes.");
+            getAllShoes();
+            document.querySelector("#buyShoeAlert").style.display = "block";
+        })
+    }
 }
 
 
@@ -227,7 +229,7 @@ $(document).ready(function() {
     $('#sizeSelect').on('change', function() {
         filterShoes();
     });
-    $('#searchBrand').keyup(function(){
-      searchBrand();
+    $('#searchBrand').keyup(function() {
+        searchBrand();
     });
 });
