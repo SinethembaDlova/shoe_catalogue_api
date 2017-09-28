@@ -36,7 +36,7 @@ shoeAPISchema.index({
 var ShoeAPI = mongoose.model('ShoeAPI', shoeAPISchema);
 
 //app using all my dependencies
-app.use('/', express.static('public'));
+app.use('/api/shoes', express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
