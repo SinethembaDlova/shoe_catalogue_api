@@ -63,6 +63,10 @@ app.use(function(req, res, next) {
 
 
 //getting my routes
+
+app.get('/',function(req,res){
+  res.redirect('/api/shoes');
+})
 //	List all shoes in stock
 app.get('/api/shoes', function(req, res) {
     ShoeAPI.find({}, null, {sort: {brand : 1}}, function(err, shoes) {
