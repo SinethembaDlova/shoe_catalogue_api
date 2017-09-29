@@ -180,14 +180,14 @@ function postShoe() {
 //A flag to capture a shoe id.
 var lastId;
 
-//Creating a modal.
+// function for buy modal.
 function uniqueModal(id) {
     $('.ui.mini.modal').modal('show');
     lastId = id;
 }
 
 function buyShoe() {
-
+    document.querySelector("#buyShoeAlert").style.display = "none";
     var id = Number(lastId);
     console.log(id);
     var ammount = {
@@ -195,20 +195,17 @@ function buyShoe() {
     };
     console.log(JSON.stringify(ammount));
 
-    if (ammount === "" || ammount === " " || ammount === "  " || ammount === "   ") {
-        document.querySelector("#ammountInputAlert").style.display = "block"
-    } else {
-        $.ajax({
-            url: url + "/sold/" + id,
-            type: "post",
-            data: JSON.stringify(ammount),
-            contentType: 'application/json'
-        }).done(function(data) {
-            console.log("You have successfully bought " + ammount + "shoes.");
-            getAllShoes();
-            document.querySelector("#buyShoeAlert").style.display = "block";
-        })
-    }
+    //document.querySelector("#ammountInputAlert").style.display = "block";
+    $.ajax({
+        url: url + "/sold/" + id,
+        type: "post",
+        data: JSON.stringify(ammount),
+        contentType: 'application/json'
+    }).done(function(data) {
+        console.log("You have successfully bought " + ammount + "shoes.");
+        getAllShoes();
+        document.querySelector("#buyShoeAlert").style.display = "block";
+    })
 }
 
 
