@@ -99,9 +99,6 @@ function searchBrand() {
 
 //Filter shoes from the DB
 function filterShoes() {
-    //display the alert message as soon as we do another thing other after uploading shoe
-    document.querySelector("#shoeUploadAlert").style.display = "none";
-    document.querySelector("#buyShoeAlert").style.display = "none";
 
     console.log("*******");
     var brand = $('#brandSelect').find(':selected').val();
@@ -171,6 +168,9 @@ function postShoe() {
     }).done(function(data) {
         getAllShoes();
         document.querySelector("#shoeUploadAlert").style.display = "block";
+        setTimeout(function(){
+          document.querySelector("#shoeUploadAlert").style.display = "none";
+        },5000);
     })
 
 }
@@ -205,6 +205,9 @@ function buyShoe() {
         console.log("You have successfully bought " + ammount + "shoes.");
         getAllShoes();
         document.querySelector("#buyShoeAlert").style.display = "block";
+        setTimeout(function(){
+          document.querySelector("#buyShoeAlert").style.display = "none";
+        }, 5000)
     })
 }
 
