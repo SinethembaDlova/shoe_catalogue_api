@@ -168,9 +168,9 @@ function postShoe() {
     }).done(function(data) {
         getAllShoes();
         document.querySelector("#shoeUploadAlert").style.display = "block";
-        setTimeout(function(){
-          document.querySelector("#shoeUploadAlert").style.display = "none";
-        },5000);
+        setTimeout(function() {
+            document.querySelector("#shoeUploadAlert").style.display = "none";
+        }, 5000);
     })
 
 }
@@ -179,17 +179,32 @@ function postShoe() {
 
 //A flag to capture a shoe id.
 var lastId;
-
+var itemPrice;
 // function for buy modal.
 function uniqueModal(id) {
     $('.ui.mini.modal').modal('show');
+    console.log(event.srcElement.value);
     lastId = id;
+    itemPrice = event.srcElement.value;
+
+
 }
+
+function calculateTotal() {
+    console.log("count me");
+    total = itemPrice * document.querySelector("#howmany").value;
+    document.querySelector("#price").innerHTML = itemPrice;
+    console.log($("#totalPrice"));
+    document.querySelector("#totalPrice").innerHTML = total;
+    console.log(total);
+}
+
+
 
 function buyShoe() {
     document.querySelector("#buyShoeAlert").style.display = "none";
     var id = Number(lastId);
-    console.log(id);
+    //console.log(id);
     var ammount = {
         ammount: document.querySelector("#howmany").value
     };
@@ -202,11 +217,14 @@ function buyShoe() {
         data: JSON.stringify(ammount),
         contentType: 'application/json'
     }).done(function(data) {
+
+        console.log(document.querySelector("#howmany").value);
+
         console.log("You have successfully bought " + ammount + "shoes.");
         getAllShoes();
         document.querySelector("#buyShoeAlert").style.display = "block";
-        setTimeout(function(){
-          document.querySelector("#buyShoeAlert").style.display = "none";
+        setTimeout(function() {
+            document.querySelector("#buyShoeAlert").style.display = "none";
         }, 5000)
     })
 }

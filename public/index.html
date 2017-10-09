@@ -35,7 +35,7 @@
                 </div>
                 <div class="extra content">
                     {{#if in_stock}}
-                    <button onclick="uniqueModal({{id}})" class="ui button float-right bg-primary text-white right labeled icon" id="buyButton">Buy Shoe <i class="add to cart icon"></i></button>
+                    <button onclick="uniqueModal({{id}})" class="ui button float-right bg-primary text-white right labeled icon" value={{price}} id="buyButton">Buy Shoe <i class="add to cart icon"></i></button>
                     {{else}}
                     <div class="alert alert-danger text-center" role="alert" id="soldOutAlert">
                     <b>This shoe is sold out</b>
@@ -185,9 +185,15 @@
         <div class="image content">
             <div class="description">
                 <div class="ui inverted segment">
+                    <span class="float-right">Price: R<span id="price"></span></span>
+                    <br>
                     <div class="ui fluid inverted input">
-                        <input class="text-center" type="text" name="ammount" id="howmany" placeholder="How many shoes do want to buy?">
+                        <input class="text-center" type="Number" min="1" onkeyup="calculateTotal()" name="ammount" id="howmany" placeholder="How many shoes do want to buy?">
                     </div>
+
+                    <br>
+                    Total Price: R<span id="totalPrice"></span>
+
                     <div class="alert alert-danger text-center mt-2" role="alert" id="ammountInputAlert">
                       <b>Please enter an ammount.</b>
                     </div>
